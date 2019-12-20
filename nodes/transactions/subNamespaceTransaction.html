@@ -1,0 +1,84 @@
+<script type="text/javascript">
+    RED.nodes.registerType('subNamespace', {
+        category: 'ProximaX transactions',
+        color: '#FF6666',
+        defaults: {
+            name: {value: ""},
+            namespace: {value: "", validate: RED.validators.regex(/^([0-9a-z_\-]{0,64})(\.[0-9a-z_\-]{1,64}){0,1}$/)},
+            subNamespace: {value: "", validate: RED.validators.regex(/^([0-9 a-z _ \-]){1,64}$/)},
+            network: {value: "", type: "network"}
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "sub namespace transaction";
+        },
+        oneditprepare: function () {}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="subNamespace">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-network"><i class="fa fa-globe"></i> Network</label>
+        <input type="text" id="node-input-network">
+    </div>
+    <div class="form-row" id="node-input-namespaceView">
+        <label for="node-input-namespace"><i></i>Root namespace</label>
+        <input type="text" id="node-input-namespace" placeholder="root namespace">
+    </div>
+    <div class="form-row" id='node-input-subNamespaceView'>
+        <label for="node-input-subNamespace"><i></i>Subnamespace</label>
+        <input type="text" id="node-input-subNamespace" placeholder="subnamespace">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="subNamespace">
+    <p>Create a register namespace transaction for a sub-namespace.</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>root namespace <span class="property-type">string</span></dt>
+        <dd>The namespace name.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>subnamespace <span class="property-type">string</span></dt>
+        <dd>The subnamespace name.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>duration <span class="property-type">number</span></dt>
+        <dd>The duration rental in blocks.</dd>
+    </dl>
+    <h3>Inputs</h3>
+        <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>root namespace <span class="property-type">string</span></dt>
+        <dd>The namespace name.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>subnamespace <span class="property-type">string</span></dt>
+        <dd>The subnamespace name.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>duration <span class="property-type">number</span></dt>
+        <dd>The duration rental in blocks.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>transactionType <span class="property-type">string</span></dt>
+        <dd>createSubNamespace.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>transaction <span class="property-type">object</span></dt>
+    </dl>
+</script>

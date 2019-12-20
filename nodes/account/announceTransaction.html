@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    RED.nodes.registerType('announce', {
+        category: 'ProximaX account',
+        color: '#66CCCC',
+        defaults: {
+            name: {value: ""},
+            network: {value: "", type: "network"}
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "announce transaction";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="announce">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-network"><i class="fa fa-globe"></i> Network</label>
+        <input type="text" id="node-input-network">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="announce">
+    <p>Announce transaction.</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>signedTransaction <span class="property-type">object</span></dt>
+        <dd>The signed transaction.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>announced<span class="property-type">object</span></dt>
+        <dd>The announced transaction.</dd>
+    </dl>
+</script>
