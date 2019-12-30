@@ -1,0 +1,49 @@
+<script type="text/javascript">
+    RED.nodes.registerType('network', {
+        category: 'config',
+        defaults: {
+            url: {
+                value: "",
+                required: true,
+                validate: RED.validators.regex(/^((http|https):\/\/)[-a-zA-Z0-9@:%.\/_\+~#=]+$|^.{0}$/)
+            },
+            network: {value: "", required: true, validate: RED.validators.regex(/^(MAIN NET|TEST NET|MIJIN|MIJIN TEST)$|^.{0}$/)},
+            port: {value: "3000", required: true, validate: RED.validators.number()}
+        },
+        label: function () {
+            return this.network + " " + this.url + ":" + this.port;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="network">
+    <div class="form-row">
+        <label for="node-config-input-url">URL</label>
+        <input value="https://arcturus.xpxsirius.io" type="text" id="node-config-input-url" placeholder="http(s)://url or ip address">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port">Port</label>
+        <input value="3000" type="text" id="node-config-input-port" style="width:65px" placeholder="3000"></input>
+    </div>
+    <div class="form-row" id="node-input-networkView">
+        <label for="node-input-network"><i class="fa fa-server"></i> Network</label>
+        <input type="text" id="node-config-input-network" placeholder="MAIN NET, TEST NET, MIJIN, MIJIN TEST"></input>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="network">
+    <p>Configure the network.</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>URL <span class="property-type">string</span></dt>
+        <dd>The server URL.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>port <span class="property-type">number</span></dt>
+        <dd>The server port.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">string</span></dt>
+        <dd>Type of the network (MAIN NET, TEST NET, etc.)</dd>
+    </dl>
+</script>

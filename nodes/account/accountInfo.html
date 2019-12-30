@@ -1,0 +1,100 @@
+<script type="text/javascript">
+    RED.nodes.registerType('accountInfo', {
+        category: 'ProximaX account',
+        color: '#12CAD6',
+        defaults: {
+            name: {value: ""},
+            address: {
+                value: "",
+                validate: RED.validators.regex(/^([0-9a-zA-Z]){40}$|^((([0-9a-zA-Z\-]){7}){6}([0-9a-zA-Z]){4}){0,1}$/)
+            },
+            network: {value: "", type: "network"}
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "account info";
+        },
+        button: {
+            enabled: function () {
+                return !this.changed
+            },
+            onclick: function () {
+                if (this.changed) {
+                    return RED.notify(RED._("notification.warning", {message: RED._("notification.warnings.undeployedChanges")}), "warning");
+                }
+                if (!this.address.trim()) {
+                    return RED.notify(RED._("Warning: address is not defined"), "warning");
+                }
+                var label = (this.name || "accountInfo");
+                var node = this;
+                $.ajax({
+                    url: "inject/" + this.id,
+                    type: "POST",
+                    success: function (resp, textStatus, xhr) {
+                        RED.notify(node._("succesfully started " + label), "success");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status === 404) {
+                            RED.notify(node._("common.notification.error", {message: node._("common.notification.errors.not-deployed")}), "error");
+                        } else if (jqXHR.status === 500) {
+                            RED.notify(node._("common.notification.error", {message: node._("inject.errors.failed")}), "error");
+                        } else if (jqXHR.status === 0) {
+                            RED.notify(node._("common.notification.error", {message: node._("common.notification.errors.no-response")}), "error");
+                        } else {
+                            RED.notify(node._("common.notification.error", {
+                                message: node._("common.notification.errors.unexpected", {
+                                    status: jqXHR.status,
+                                    message: textStatus
+                                })
+                            }), "error");
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="accountInfo">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+    </div>
+    <div class="form-row">
+        <label for="node-input-address"><i class="fa fa-address-card"></i> Address</label>
+        <input type="text" id="node-input-address" placeholder="Address">
+    </div>
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-network"><i class="fa fa-globe"></i> Network</label>
+        <input type="text" id="node-input-network">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="accountInfo">
+    <p>Get information about account.</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>address <span class="property-type">string</span></dt>
+        <dd>The account address.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>address <span class="property-type">string</span></dt>
+        <dd>The account address.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>accountInfo<span class="property-type">object</span></dt>
+        <dd>The information about account.</dd>
+    </dl>
+</script>

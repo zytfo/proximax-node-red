@@ -1,0 +1,117 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mosaicDefinition', {
+        category: 'ProximaX transactions',
+        color: '#FF6666',
+        defaults: {
+            name: {value: ""},
+            namespace: {value: "", validate: RED.validators.regex(/^([0-9a-z_\-]{0,64})(\.[0-9a-z_\-]{1,64}){0,2}$/)},
+            mosaic: {value: "", validate: RED.validators.regex(/^([0-9a-z_\-]){0,64}$/)},
+            supplyMutable: {value: true},
+            transferable: {value: true},
+            levyMutable: {value: false},
+            divisibility: {value: 0, validate: RED.validators.regex(/^([0-6])$/)},
+            duration: {value: 0, validate: RED.validators.number()},
+            network: {value: "", type: "network"}
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "mosaic definition transaction";
+        },
+        oneditprepare: function () { }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mosaicDefinition">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-network"><i class="fa fa-globe"></i> Network</label>
+        <input type="text" id="node-input-network">
+    </div>
+    <div class="form-row" id="node-input-namespaceView">
+        <label for="node-input-namespace"><i></i>Namespace</label>
+        <input type="text" id="node-input-namespace" placeholder="namespace.subnamespace">
+    </div>
+    <div class="form-row" id="node-input-transferableView">
+        <label for="node-input-transferable"><i></i> transferable</label>
+        <input type="checkbox" id="node-input-transferable">
+    </div>
+    <div class="form-row" id="node-input-supplyMutableView">
+        <label for="node-input-supplyMutable"><i></i> supply mutable</label>
+        <input type="checkbox" id="node-input-supplyMutable">
+    </div>
+    <div class="form-row" id="node-input-divisibilityView">
+        <label for="node-input-divisibility"><i></i> divisibility</label>
+        <input type="number" id="node-input-divisibility">
+    </div>
+    <div class="form-row" id="node-input-durationView">
+        <label for="node-input-duration"><i></i> duration (in blocks)</label>
+        <input type="number" id="node-input-duration">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="mosaicDefinition">
+    <p>Create a mosaic definition transaction.</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>namespace <span class="property-type">string</span></dt>
+        <dd>The namespace name.</dd>
+    </dl>
+     <dl class="message-properties">
+        <dt>transferable <span class="property-type">boolean</span></dt>
+        <dd>Transferable.</dd>
+    </dl>
+     <dl class="message-properties">
+        <dt>supply mutable <span class="property-type">boolean</span></dt>
+        <dd>Supply mutable.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>divisibility <span class="property-type">number</span></dt>
+        <dd>Divisibility.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>duration <span class="property-type">number</span></dt>
+        <dd>Duration.</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>namespace <span class="property-type">string</span></dt>
+        <dd>The namespace name.</dd>
+    </dl>
+     <dl class="message-properties">
+        <dt>transferable <span class="property-type">boolean</span></dt>
+        <dd>Transferable.</dd>
+    </dl>
+     <dl class="message-properties">
+        <dt>supply mutable <span class="property-type">boolean</span></dt>
+        <dd>Supply mutable.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>divisibility <span class="property-type">number</span></dt>
+        <dd>Divisibility.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>duration <span class="property-type">number</span></dt>
+        <dd>Duration.</dd>
+    </dl>
+    <h3>Outputs</h3>
+   <dl class="message-properties">
+        <dt>transactionType <span class="property-type">string</span></dt>
+        <dd>mosaicDefinition.</dd>
+   </dl>
+   <dl class="message-properties">
+        <dt>transaction <span class="property-type">object</span></dt>
+   </dl>
+</script>

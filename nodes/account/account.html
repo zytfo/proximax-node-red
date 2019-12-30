@@ -1,0 +1,148 @@
+<script type="text/javascript">
+    RED.nodes.registerType('account', {
+        category: 'ProximaX account',
+        color: '#FFCC00',
+        defaults: {
+            name: {value: ""},
+            creationType: {value: "From private key"},
+            privateKey: {value: "", validate: RED.validators.regex(/^([0-9A-Fa-f]{2}){32}$|^.{0}$/)},
+            publicKey: {value: ""},
+            network: {value: "", type: "network"}
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "account";
+        },
+        button: {
+            enabled: function () {
+                return !this.changed
+            },
+            onclick: function () {
+                if (this.changed) {
+                    return RED.notify(RED._("notification.warning", {message: RED._("notification.warnings.undeployedChanges")}), "warning");
+                }
+                if (!this.privateKey.trim() && this.creationType === "From private key") {
+                    return RED.notify(RED._("Warning: private key is not defined"), "warning");
+                }
+                var label = (this.name || "account");
+                var node = this;
+                $.ajax({
+                    url: "inject/" + this.id,
+                    type: "POST",
+                    success: function (resp, textStatus, xhr) {
+                        RED.notify(node._("succesfully injected " + label), "success");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status === 404) {
+                            RED.notify(node._("common.notification.error", {message: node._("common.notification.errors.not-deployed")}), "error");
+                        } else if (jqXHR.status === 500) {
+                            RED.notify(node._("common.notification.error", {message: node._("inject.errors.failed")}), "error");
+                        } else if (jqXHR.status === 0) {
+                            RED.notify(node._("common.notification.error", {message: node._("common.notification.errors.no-response")}), "error");
+                        } else {
+                            RED.notify(node._("common.notification.error", {
+                                message: node._("common.notification.errors.unexpected", {
+                                    status: jqXHR.status,
+                                    message: textStatus
+                                })
+                            }), "error");
+                        }
+                    }
+                });
+            }
+        },
+        oneditprepare: function () {
+            $("#node-input-creationType").on("change", function () {
+                if ($(this).val() === "From private key") {
+                    $("#node-input-publicKeyView").hide();
+                    $("#node-input-privateKeyView").show();
+                } else if ($(this).val() === "From public key") {
+                    $("#node-input-privateKeyView").hide();
+                    $("#node-input-publicKeyView").show();
+                } else {
+                    $("#node-input-privateKeyView").hide();
+                    $("#node-input-publicKeyView").hide();
+                }
+            });
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="account">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+    <div class="form-row" id="node-input-creationTypeView" >
+        <label for="node-input-creationType"><i class="fa fa-globe"></i> Account creation type</label>
+        <select id="node-input-creationType">
+            <option>From private key</option>
+            <option>From public key</option>
+            <option>Generate new</option>
+        </select>
+    </div>
+    <div class="form-row" id="node-input-privateKeyView">
+        <label for="node-input-privateKey"><i class="fa fa-key"></i> Private key</label>
+        <input type="text" id="node-input-privateKey" placeholder="private key ">
+    </div>
+    <div class="form-row" id="node-input-publicKeyView">
+        <label for="node-input-publicKey"><i class="fa fa-key"></i> Public key</label>
+        <input type="text" id="node-input-publicKey" placeholder="public key ">
+    </div>
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-network"><i></i> Network</label>
+        <input type="text" id="node-input-network">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="account">
+    <p>Set up your account</p>
+    <dl class="message-properties">
+        <dt>account creation type <span class="property-type">object</span></dt>
+        <dd>The type of account creation.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>privateKey <span class="property-type">string</span></dt>
+        <dd>The private key.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>publicKey <span class="property-type">string</span></dt>
+        <dd>The public key.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>account creation type <span class="property-type">object</span></dt>
+        <dd>The type of account creation.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>privateKey <span class="property-type">string</span></dt>
+        <dd>The private key.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>publicKey <span class="property-type">string</span></dt>
+        <dd>The public key.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>networkType <span class="property-type">object</span></dt>
+        <dd>Type of the network (MAIN NET, TEST NET, etc.)</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>address <span class="property-type">string</span></dt>
+        <dd>The account address.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>privateKey<span class="property-type">string</span></dt>
+        <dd>The account private key (none if public key account creation selected).</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>publicKey <span class="property-type">string</span></dt>
+        <dd>The account public key.</dd>
+    </dl>
+</script>

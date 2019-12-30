@@ -1,0 +1,48 @@
+{
+  "name": "node-red-contrib-proximax",
+  "version": "0.0.4",
+  "description": "ProximaX Sirius Nodes",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zytfo/proximax-node-red.git"
+  },
+  "author": "zytfo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/zytfo/proximax-node-red/issues"
+  },
+  "keywords": [
+    "blockchain",
+    "proximax",
+    "sirius"
+  ],
+  "homepage": "https://github.com/zytfo/proximax-node-red#readme",
+  "node-red": {
+    "nodes": {
+      "account": "nodes/account/account.js",
+      "accountInfo": "nodes/account/accountInfo.js",
+      "signTransaction": "nodes/account/signTransaction.js",
+      "announceTransaction": "nodes/account/announceTransaction.js",
+      "transferTransaction": "nodes/transactions/transferTransaction.js",
+      "mosaicDefinitionTransaction": "nodes/transactions/mosaicDefinitionTransaction.js",
+      "namespaceTransaction": "nodes/transactions/namespaceTransaction.js",
+      "subNamespaceTransaction": "nodes/transactions/subNamespaceTransaction.js",
+      "network": "nodes/config/network.js"
+    }
+  },
+  "dependencies": {
+    "tsjs-xpx-chain-sdk": "^0.6.2",
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.4",
+    "node-red": "^1.0.3",
+    "node-red-node-test-helper": "^0.1.7"
+  },
+  "engines": {
+    "node": ">=8"
+  }
+}
