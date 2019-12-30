@@ -10,15 +10,11 @@
 
 ```npm install -g node-red```
 
-2. Install `node-red-contrib-proximax`. 
-
-```npm install node-red-contrib-proximax```
-
-3. Run Node-Eed. 
+2. Run Node-Red. 
 
 ```node-red```
 
-4. Install ProximaX nodes from palette interface.
+3. Install ProximaX nodes from palette interface (e.g. search for `proximax`).
 
 
 ### Using git clone
@@ -46,7 +42,7 @@
 
 ```npm install <cloned repository>```
 
-7. Run Node-Eed. 
+7. Run Node-Red. 
 
 ```node-red```
 
