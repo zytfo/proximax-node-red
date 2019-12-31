@@ -5,7 +5,6 @@
         defaults: {
             name: {value: ""},
             namespace: {value: "", validate: RED.validators.regex(/^([0-9a-z_\-]{0,64})(\.[0-9a-z_\-]{1,64}){0,2}$/)},
-            mosaic: {value: "", validate: RED.validators.regex(/^([0-9a-z_\-]){0,64}$/)},
             supplyMutable: {value: true},
             transferable: {value: true},
             levyMutable: {value: false},

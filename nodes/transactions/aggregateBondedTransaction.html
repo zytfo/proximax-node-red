@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    RED.nodes.registerType('aggregateBonded', {
+        category: 'ProximaX transactions',
+        color: '#DC8B16',
+        defaults: {
+            name: { value: "" },
+            trigger: { value: "" },
+            network: { value: "", type: "network" }
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "aggregateBonded transaction";
+        },
+        oneditprepare: function () { }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="aggregateBonded">
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-server"><i></i> network</label>
+        <input type="text" id="node-input-network">
+    </div>
+    <div class="form-row"id="node-input-triggerView">
+        <label for="node-input-trigger"><i class="icon-play"></i>trigger</label>
+        <input type="text" id="node-input-trigger" placeholder="trigger">
+    </div>
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i>name</label>
+        <input type="text" id="node-input-name"placeholder="name (optional)">
+    </div>
+</script>
+<script type="text/x-red" data-help-name="aggregateBonded">
+    <p>Create an aggregate transactions</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>trigger <span class="property-type">string</span></dt>
+        <dd>Trigger name, for example "finished".</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>transaction <span class="property-type">object</span></dt>
+        <dd>The inner transaction. Link multiple inner transaction nodes.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>publicKey <span class="property-type">string</span></dt>
+        <dd>The publicKey where the transaction is send from can be added in the transaction node or can be added by placing the publicAccount node in front of this node or transaction node</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>trigger <span class="property-type">string</span></dt>
+    </dl>
+    <h3>Outputs</h3>
+   <dl class="message-properties">
+        <dt>transactionType <span class="property-type">string</span></dt>
+        <dd>aggregateBonded.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>transaction <span class="property-type">object</span></dt>
+        <dd>AggregateTransaction object.</dd>
+    </dl>
+</script>

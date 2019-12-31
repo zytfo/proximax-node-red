@@ -1,0 +1,60 @@
+<script type="text/javascript">
+    RED.nodes.registerType('lockFund', {
+        category: 'ProximaX transactions',
+        color: '#F3AA42',
+        defaults: {
+            name: { value: "" },
+            lockAmount: { value: 10, validate: RED.validators.number() },
+            network: { value: "", type: "network" }
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "lock fund transaction";
+        },
+        oneditprepare: function () {}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="lockFund">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-network"><i class="fa fa-globe"></i> Network</label>
+        <input type="text" id="node-input-network">
+    </div>
+    <div class="form-row" id="node-input-lockamountView">
+        <label for="node-input-lockAmount"><i></i>Lock amount</label>
+        <input type="number" id="node-input-lockAmount" placeholder=10>
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="lockFund">
+    <p>Create a LockFundsTransaction.</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>lock amount <span class="property-type">number</span></dt>
+        <dd>XPX amount to lock.</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>signedTransaction <span class="property-type">object</span></dt>
+        <dd>SignedTransaction object.</dd>
+    </dl>
+    <h3>Outputs</h3>
+        <dl class="message-properties">
+        <dt>transactionType <span class="property-type">string</span></dt>
+        <dd>lockFund.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>transaction <span class="property-type">object</span></dt>
+        <dd>LockFundsTransaction object.</dd>
+    </dl>
+</script>

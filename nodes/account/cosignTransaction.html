@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    RED.nodes.registerType('cosignature', {
+        category: 'ProximaX transactions',
+        color: '#DC8B16',
+        defaults: {
+            name: { value: "" },
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "co-signature transaction";
+        },
+        oneditprepare: function () {}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="cosignature">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="cosignature">
+    <p>Prepare a aggregate bonded transaction with missing cosignatures.<br/>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+       <dt>transaction <span class="property-type">object</span></dt>
+       <dd>The AggregateTransaction object to cosign.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>transactionType <span class="property-type">string</span></dt>
+        <dd>Cosignature.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>transaction <span class="property-type">object</span></dt>
+        <dd>CosignatureTransaction object.</dd>
+    </dl>
+</script>

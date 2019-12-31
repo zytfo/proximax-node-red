@@ -1,0 +1,98 @@
+<script type="text/javascript">
+    RED.nodes.registerType('modifyMultisigAccount', {
+        category: 'ProximaX transactions',
+        color: '#F3AA42',
+        defaults: {
+            name: { value: "" },
+            minApproval: { value: 1, validate: RED.validators.number() },
+            minRemoval: { value: 1, validate: RED.validators.number() },
+            remove: { value: false },
+            trigger: { value: "" },
+            network: { value: "", type: "network" }
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "modify multisig account transaction";
+        },
+        oneditprepare: function () {
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="modifyMultisigAccount">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-server"><i></i> network</label>
+        <input type="text" id="node-input-network">
+    </div>
+    <div class="form-row" id="node-input-minApprovalView">
+        <label for="node-input-minApproval"><i></i>min approval</label>
+        <input type="text" id="node-input-minApproval" placeholder="minApproval">
+    </div>
+    <div class="form-row" id="node-input-minRemovalView">
+        <label for="node-input-minRemoval"><i></i>min removal</label>
+        <input type="text" id="node-input-minRemoval" placeholder="minRemoval">
+    </div>
+    <div class="form-row" id="node-input-removeView">
+        <label for="node-input-remove"><i></i>remove</label>
+        <input type="checkbox" id="node-input-remove" placeholder=false>
+    </div>
+    <div class="form-row" id="node-input-triggerView">
+        <label for="node-input-trigger"><i class="icon-play"></i>trigger</label>
+        <input type="text" id="node-input-trigger" placeholder="trigger">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="configMultisig">
+    <p>Create a modify multisig account transaction</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+       <dt>minApproval <span class="property-type">number</span></dt>
+       <dd>The number of signatures needed to approve a transaction. If we are modifying an existing multisig account this indicates the relative change of the minimum cosignatories.</dd>
+    </dl>
+    <dl class="message-properties">
+       <dt>minRemoval <span class="property-type">number</span></dt>
+       <dd>The number of signatures needed to remove a cosignatory. If we are modifying an existing multisig account this indicates the relative change of the minimum cosignatories.</dd>
+    </dl>
+    <dl class="message-properties">
+       <dt>remove <span class="property-type">boolean</span></dt>
+       <dd>You are going to remove a cosignatory.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>trigger <span class="property-type">string</span></dt>
+        <dd>Trigger name, for example "finished".</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+       <dt>minApproval <span class="property-type">number</span></dt>
+       <dd>The number of signatures needed to approve a transaction. If we are modifying an existing multisig account this indicates the relative change of the minimum cosignatories.</dd>
+    </dl>
+    <dl class="message-properties">
+       <dt>minRemoval <span class="property-type">number</span></dt>
+       <dd>The number of signatures needed to remove a cosignatory. If we are modifying an existing multisig account this indicates the relative change of the minimum cosignatories.</dd>
+    </dl>
+    <dl class="message-properties">
+       <dt>publicAccount <span class="property-type">object</span></dt>
+       <dd>The publicAccount object to be added as a cosigner (or removed). Link multiple inner transaction nodes.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>trigger <span class="property-type">string</span></dt>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>transactionType <span class="property-type">string</span></dt>
+        <dd>convertIntoMultisig.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>transaction <span class="property-type">object</span></dt>
+        <dd>ModifyMultisigAccountTransaction object.</dd>
+    </dl>
+</script>
