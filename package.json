@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-proximax",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "ProximaX Sirius Nodes",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,8 @@
   "keywords": [
     "blockchain",
     "proximax",
-    "sirius"
+    "sirius",
+    "node-red"
   ],
   "homepage": "https://github.com/zytfo/proximax-node-red#readme",
   "node-red": {
