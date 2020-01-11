@@ -37,6 +37,7 @@
       "modifyMultisigAccountTransaction": "nodes/transactions/modifyMultisigAccountTransaction.js",
       "mosaicSupplyChangeTransaction": "nodes/transactions/mosaicSupplyChangeTransaction.js",
       "aggregateBondedTransaction": "nodes/transactions/aggregateBondedTransaction.js",
+      "mosaicAliasTransaction": "nodes/transactions/mosaicAliasTransaction.js",
       "network": "nodes/config/network.js"
     }
   },

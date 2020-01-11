@@ -1,0 +1,76 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mosaicAlias', {
+        category: 'ProximaX transactions',
+        color: '#FF6666',
+        defaults: {
+            name: {value: ""},
+            namespace: {value: "", validate: RED.validators.regex(/^([0-9a-z_\-]{0,64})(\.[0-9a-z_\-]{1,64}){0,2}$/)},
+            mosaicId: {value: ""},
+            network: {value: "", type: "network"}
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "mosaic alias transaction";
+        },
+        oneditprepare: function () { }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mosaicAlias">
+    <div class="form-row" id="node-input-nameView">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name"placeholder="Name (optional)">
+    </div>
+    <div class="form-row" id="node-input-namespaceView">
+        <label for="node-input-namespace"><i></i>Namespace</label>
+        <input type="text" id="node-input-namespace" placeholder="namespace.subnamespace">
+    </div>
+    <div class="form-row" id="node-input-mosaicIdView">
+        <label for="node-input-mosaicId"><i></i>Mosaic Id</label>
+        <input type="text" id="node-input-mosaicId" placeholder="mosaic id">
+    </div>
+    <div class="form-row" id="node-input-networkView" >
+        <label for="node-input-network"><i class="fa fa-globe"></i> Network</label>
+        <input type="text" id="node-input-network">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="mosaicAlias">
+    <p>Create a mosaic alias transaction.</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>namespace <span class="property-type">string</span></dt>
+        <dd>The namespace name.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>Mosaic Id <span class="property-type">string</span></dt>
+        <dd>The mosaic id.</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>network <span class="property-type">object</span></dt>
+        <dd>The network configuration.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>namespace <span class="property-type">string</span></dt>
+        <dd>The namespace name.</dd>
+    </dl>
+     <dl class="message-properties">
+        <dt>Mosaic Id <span class="property-type">string</span></dt>
+        <dd>The mosaic id.</dd>
+    </dl>
+    <h3>Outputs</h3>
+   <dl class="message-properties">
+        <dt>transactionType <span class="property-type">string</span></dt>
+        <dd>mosaicAlias.</dd>
+   </dl>
+   <dl class="message-properties">
+        <dt>transaction <span class="property-type">object</span></dt>
+   </dl>
+</script>

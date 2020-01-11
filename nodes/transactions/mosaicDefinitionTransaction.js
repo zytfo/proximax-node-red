@@ -5,7 +5,6 @@ module.exports = function (RED) {
 
         RED.nodes.createNode(this, config);
         this.namespace = config.namespace;
-        this.mosaic = config.mosaic;
         this.supplyMutable = config.supplyMutable;
         this.transferable = config.transferable;
         this.levyMutable = config.levyMutable;
