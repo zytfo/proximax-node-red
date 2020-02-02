@@ -1,11 +1,6 @@
 module.exports = function (RED) {
     function lockFund(config) {
-        const {LockFundsTransaction, Deadline, UInt64, Mosaic, MosaicId} = require('tsjs-xpx-chain-sdk');
-
-        const hundredXpx = new Mosaic(new MosaicId([
-            481110499,
-            231112638
-        ]), UInt64.fromUint(100 * 1000000));
+        const {LockFundsTransaction, Deadline, UInt64, NetworkCurrencyMosaic} = require('tsjs-xpx-chain-sdk');
 
         RED.nodes.createNode(this, config);
         this.lockAmount = config.lockAmount;
@@ -20,7 +15,7 @@ module.exports = function (RED) {
                 if (msg.proximax.signedTransaction !== "undefined") {
                     msg.proximax.transaction = LockFundsTransaction.create(
                         Deadline.create(),
-                        hundredXpx,
+                        NetworkCurrencyMosaic.createRelative(node.lockAmount),
                         UInt64.fromUint(480),
                         msg.proximax.signedTransaction,
                         network);
