@@ -40,8 +40,8 @@
   },
   "devDependencies": {
     "lodash": "^4.17.4",
-    "node-red": "^1.0.3",
-    "node-red-node-test-helper": "^0.1.7"
+    "node-red": "^3.0.2",
+    "node-red-node-test-helper": "^0.3.0"
   },
   "engines": {
     "node": ">=8"
